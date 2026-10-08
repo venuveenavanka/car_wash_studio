@@ -130,6 +130,12 @@ const vehicleImages = {
   }
 };
 
+// 360 Image Sequence State
+let currentFrame = 1;
+const totalFrames = 36;
+let isDragging360 = false;
+let startX = 0;
+
 function updateRealCarDisplay() {
   const imgEl = document.getElementById('realCarImageDisplay');
   const badgeEl = document.getElementById('viewerFinishBadge');
@@ -138,14 +144,31 @@ function updateRealCarDisplay() {
   const vId = state.selectedVehicle ? state.selectedVehicle.id : 'bmw-5';
   const finish = state.selectedPpfFinish || 'gloss_ppf';
 
-  let imgSrc = 'assets/images/bmw_5_gloss.png';
+  let baseSrc = 'assets/images/bmw_5_gloss.png';
   if (vehicleImages[vId]) {
-    imgSrc = vehicleImages[vId][finish] || vehicleImages[vId]['gloss_ppf'] || vehicleImages[vId]['original'];
+    baseSrc = vehicleImages[vId][finish] || vehicleImages[vId]['gloss_ppf'] || vehicleImages[vId]['original'];
   } else {
-    if (state.selectedCategory === 'SUV') imgSrc = 'assets/images/audi_q5.png';
-    else if (state.selectedCategory === 'Sports') imgSrc = 'assets/images/porsche_911.png';
-    else imgSrc = 'assets/images/bmw_5_gloss.png';
+    if (state.selectedCategory === 'SUV') baseSrc = 'assets/images/audi_q5.png';
+    else if (state.selectedCategory === 'Sports') baseSrc = 'assets/images/porsche_911.png';
+    else baseSrc = 'assets/images/bmw_5_gloss.png';
   }
+
+  // Generate the current frame or view image name
+  let imgSrc = baseSrc;
+  const view = state.selectedCameraView || '3d';
+
+  if (view !== '3d') {
+    const dotIndex = baseSrc.lastIndexOf('.');
+    imgSrc = baseSrc.substring(0, dotIndex) + '_' + view + baseSrc.substring(dotIndex);
+  } else if (currentFrame > 1) {
+    const dotIndex = baseSrc.lastIndexOf('.');
+    imgSrc = baseSrc.substring(0, dotIndex) + '_' + currentFrame + baseSrc.substring(dotIndex);
+  }
+
+  // Handle image load error by falling back to base image if frame doesn't exist
+  imgEl.onerror = function() {
+    this.src = baseSrc;
+  };
 
   imgEl.style.opacity = '0.3';
   imgEl.style.transform = 'scale(0.97)';
@@ -153,12 +176,72 @@ function updateRealCarDisplay() {
     imgEl.src = imgSrc;
     imgEl.style.opacity = '0.98';
     imgEl.style.transform = 'scale(1.0)';
-  }, 120);
+  }, 50); // Faster update for smooth dragging
 
   if (badgeEl && state.selectedVehicle) {
     const finishLabel = finish.replace('_', ' ').toUpperCase();
     badgeEl.innerHTML = `<i class="fa-solid fa-car"></i> ${state.selectedVehicle.name} — ${finishLabel}`;
   }
+}
+
+// 360 Viewer Drag Logic
+function setup360Viewer() {
+  const container = document.querySelector('.viewer-container');
+  if (!container) return;
+
+  container.addEventListener('mousedown', (e) => {
+    isDragging360 = true;
+    startX = e.clientX;
+    container.style.cursor = 'grabbing';
+  });
+
+  window.addEventListener('mouseup', () => {
+    isDragging360 = false;
+    container.style.cursor = 'grab';
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging360) return;
+    const deltaX = e.clientX - startX;
+    
+    // Every 15px dragged changes 1 frame
+    if (Math.abs(deltaX) > 15) {
+      if (deltaX > 0) {
+        currentFrame = currentFrame === 1 ? totalFrames : currentFrame - 1;
+      } else {
+        currentFrame = currentFrame === totalFrames ? 1 : currentFrame + 1;
+      }
+      startX = e.clientX; // reset for next frame
+      updateRealCarDisplay();
+    }
+  });
+
+  // Touch support for mobile
+  container.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+      isDragging360 = true;
+      startX = e.touches[0].clientX;
+    }
+  });
+
+  window.addEventListener('touchend', () => {
+    isDragging360 = false;
+  });
+
+  window.addEventListener('touchmove', (e) => {
+    if (!isDragging360 || e.touches.length !== 1) return;
+    const deltaX = e.touches[0].clientX - startX;
+    
+    if (Math.abs(deltaX) > 15) {
+      if (deltaX > 0) {
+        currentFrame = currentFrame === 1 ? totalFrames : currentFrame - 1;
+      } else {
+        currentFrame = currentFrame === totalFrames ? 1 : currentFrame + 1;
+      }
+      startX = e.touches[0].clientX;
+      updateRealCarDisplay();
+    }
+  });
 }
 
 // Save State Helper
@@ -184,6 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupEventListeners();
   updateLiveCalculator();
   updateRealCarDisplay();
+  setup360Viewer(); // Initialize 360 image rotation
   loadSavedGarage();
 });
 
@@ -529,6 +613,12 @@ function setupEventListeners() {
       const view = e.target.dataset.view;
       document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
       e.target.classList.add('active');
+
+      state.selectedCameraView = view;
+      if (view === '3d') {
+        currentFrame = 1;
+      }
+      updateRealCarDisplay();
 
       if (window.setCameraPresetView) {
         window.setCameraPresetView(view);
