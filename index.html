@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAW STUDIOS — Premium Luxury Automotive Detailing Studio</title>
+  <meta name="description" content="Hyderabad's premiere automotive detailing studio. Engineered paint protection film (PPF), 9H ceramic coating, multi-stage paint correction, and luxury car care.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ================= HEADER / STICKY NAVBAR ================= -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="logo">
+        RAW<span class="text-gold">STUDIOS</span>
+        <span class="logo-badge">DETAILED</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero" class="nav-link active">Home</a></li>
+        <li><a href="#configurator" class="nav-link">3D Configurator</a></li>
+        <li><a href="#gallery" class="nav-link">Gallery</a></li>
+        <li><a href="#process" class="nav-link">Process</a></li>
+        <li><a href="#garage" class="nav-link">3D Garage</a></li>
+        <li><a href="#studio" class="nav-link">Studio</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Light/Dark Theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <button class="btn btn-outline btn-sm trigger-admin-modal" title="Admin Dashboard">
+          <i class="fa-solid fa-sliders"></i> Admin
+        </button>
+        <button class="btn btn-gold btn-sm trigger-booking-modal">
+          <i class="fa-solid fa-calendar-check"></i> Book Appointment
+        </button>
+        <button class="mobile-toggle" id="mobileToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section class="hero" id="hero">
+    <img src="assets/images/hero_car.png" alt="DetailX Studio Luxury Sedan" class="hero-bg-media">
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="section-tag">
+          <i class="fa-solid fa-award"></i> Precision Detailing Engineering
+        </div>
+
+        <h1 class="hero-headline">
+          YOUR CAR.<br>
+          <span class="text-gold">PERFECTED.</span><br>
+          PROTECTED.
+        </h1>
+
+        <p class="hero-subtitle">
+          Hyderabad's elite studio for paint correction, self-healing PPF, ceramic coating, and bespoke luxury vehicle protection.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#configurator" class="btn btn-gold">
+            <i class="fa-solid fa-cube"></i> Build Your Package
+          </a>
+          <button class="btn btn-outline trigger-booking-modal">
+            <i class="fa-solid fa-calendar-days"></i> Book Appointment
+          </button>
+        </div>
+
+        <div class="trust-badges">
+          <div class="trust-item"><i class="fa-solid fa-shield-check"></i> Premium Products</div>
+          <div class="trust-item"><i class="fa-solid fa-certificate"></i> Certified Detailers</div>
+          <div class="trust-item"><i class="fa-solid fa-warehouse"></i> Professional Studio</div>
+          <div class="trust-item"><i class="fa-solid fa-file-contract"></i> 10-Yr Warranty</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-3d-badge">
+      <i class="fa-solid fa-rotate"></i> Interactive 3D Studio Live Viewer Active
+    </div>
+  </section>
+
+  <!-- ================= INTERACTIVE 3D CAR CONFIGURATOR ================= -->
+  <section class="section-padding configurator-section" id="configurator">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: 3.5rem;">
+        <div class="section-tag"><i class="fa-solid fa-sliders"></i> Real-time Visual Customizer</div>
+        <h2 class="text-gradient" style="font-size: 2.8rem;">BUILD YOUR PERFECT FINISH</h2>
+        <p class="subtitle">Select your vehicle, customize paint protection film finish, ceramic gloss intensity, and view live updates in 3D.</p>
+      </div>
+
+      <div class="configurator-grid">
+        <!-- Main 3D Canvas & Options -->
+        <div class="configurator-main">
+          
+          <!-- 3D Viewer Box -->
+          <div class="viewer-container">
+            <div id="canvas3d"></div>
+            <img id="realCarImageDisplay" src="assets/images/bmw_5_gloss.png" alt="Real Studio Vehicle View" class="real-car-img-overlay">
+
+            <div class="viewer-finish-badge" id="viewerFinishBadge">
+              <i class="fa-solid fa-car"></i> BMW 5 Series — Gloss Clear PPF
+            </div>
+
+            <!-- Color Swatches Overlay -->
+            <div class="color-picker-overlay">
+              <div class="color-dot active" data-color="111622" style="background:#111622;" title="Onyx Black"></div>
+              <div class="color-dot" data-color="8a96a6" style="background:#8a96a6;" title="Studio Silver"></div>
+              <div class="color-dot" data-color="f5f7fa" style="background:#f5f7fa;" title="Alpine White"></div>
+              <div class="color-dot" data-color="0f2b48" style="background:#0f2b48;" title="Midnight Blue"></div>
+              <div class="color-dot" data-color="c5a059" style="background:#c5a059;" title="Sunset Gold"></div>
+              <div class="color-dot" data-color="800a0a" style="background:#800a0a;" title="Rosso Red"></div>
+            </div>
+
+            <!-- Camera Views Overlay -->
+            <div class="viewer-controls">
+              <button class="view-btn active" data-view="3d"><i class="fa-solid fa-arrows-rotate"></i> 3D Orbit</button>
+              <button class="view-btn" data-view="front">Front</button>
+              <button class="view-btn" data-view="side">Side</button>
+              <button class="view-btn" data-view="rear">Rear Stance</button>
+              <button class="view-btn" data-view="wheel">Wheels</button>
+            </div>
+          </div>
+
+          <!-- STEP 1: SELECT VEHICLE -->
+          <div class="glass-card">
+            <div class="step-title">
+              <span class="step-num">1</span>
+              <span>Select Vehicle Model</span>
+            </div>
+
+            <div class="category-tabs" id="categoryTabs"></div>
+            <div class="vehicle-grid" id="vehicleGrid"></div>
+          </div>
+
+          <!-- STEP 2: SELECT PROTECTION SERVICES -->
+          <div class="glass-card">
+            <div class="step-title">
+              <span class="step-num">2</span>
+              <span>Select Detailing & Protection Services</span>
+            </div>
+
+            <div class="service-selection-grid" id="servicesGrid"></div>
+          </div>
+
+          <!-- 3D PPF EXPERIENCE SECTION -->
+          <div class="glass-card">
+            <div class="step-title">
+              <span class="step-num"><i class="fa-solid fa-shield"></i></span>
+              <span>Paint Protection Film (PPF) Customizer</span>
+            </div>
+            <p class="subtitle" style="margin: 0 0 1.5rem 0; text-align:left;">Choose visual finish effect to update Three.js car material shader in real-time:</p>
+
+            <div style="margin-bottom: 1.5rem;">
+              <label class="form-label" style="margin-bottom:0.6rem; display:block;">Visual Finish Mode:</label>
+              <div class="ppf-finish-selector">
+                <button class="finish-chip" data-finish="original">Original Factory Paint</button>
+                <button class="finish-chip active" data-finish="gloss_ppf">Gloss Clear PPF</button>
+                <button class="finish-chip" data-finish="matte_ppf">Stealth Matte PPF</button>
+                <button class="finish-chip" data-finish="satin_ppf">Satin Silk PPF</button>
+                <button class="finish-chip" data-finish="ceramic_ppf">Ceramic-Coated PPF</button>
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label" style="margin-bottom:0.6rem; display:block;">Coverage Area Options:</label>
+              <div class="coverage-selector">
+                <button class="coverage-chip" data-coverage="front-bumper">Front Bumper (₹25,000)</button>
+                <button class="coverage-chip" data-coverage="partial-front">Partial Front (₹45,000)</button>
+                <button class="coverage-chip" data-coverage="full-front">Full Front (₹65,000)</button>
+                <button class="coverage-chip active" data-coverage="full-body">Full Body Protection (₹1,25,000)</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CERAMIC COATING CONFIGURATOR -->
+          <div class="glass-card">
+            <div class="step-title">
+              <span class="step-num"><i class="fa-solid fa-gem"></i></span>
+              <span>9H Nano Ceramic Coating Protection Tiers</span>
+            </div>
+            <div class="ceramic-grid" id="ceramicGrid"></div>
+          </div>
+
+          <!-- PAINT CORRECTION BEFORE/AFTER SLIDER -->
+          <div class="glass-card">
+            <div class="step-title">
+              <span class="step-num"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+              <span>Paint Correction Comparison (Swirl Removal)</span>
+            </div>
+            <p class="subtitle" style="margin:0 0 1.5rem 0; text-align:left;">Drag the slider to compare factory micro-swirls against mirror-finish optical polish:</p>
+
+            <div class="before-after-wrapper">
+              <div class="ba-image ba-before"></div>
+              <div class="ba-image ba-after"></div>
+              <div class="ba-slider-handle">
+                <div class="ba-handle-btn"><i class="fa-solid fa-code-compare"></i></div>
+              </div>
+              <div class="ba-label ba-label-before">BEFORE (Scratched/Swirled)</div>
+              <div class="ba-label ba-label-after">AFTER (3-Step Polished)</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- STICKY LIVE PRICE CALCULATOR PANEL -->
+        <div class="sticky-calculator" id="stickyCalculator">
+          <div class="calc-header">
+            <div>
+              <div class="calc-title">YOUR BUILD</div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">Real-time Package Estimate</div>
+            </div>
+            <div class="calc-vehicle-badge" id="calcVehicleBadge">BMW 5 Series</div>
+          </div>
+
+          <div class="calc-item-list" id="calcItemList">
+            <!-- Dynamically injected item rows -->
+          </div>
+
+          <div class="calc-summary">
+            <div class="calc-row">
+              <span>Subtotal</span>
+              <span id="calcSubtotal">₹0</span>
+            </div>
+            <div class="calc-row">
+              <span>Estimated Taxes (18% GST)</span>
+              <span id="calcTax">₹0</span>
+            </div>
+            <div class="calc-row total">
+              <span>TOTAL PRICE</span>
+              <span class="calc-total-val" id="calcTotal">₹0</span>
+            </div>
+          </div>
+
+          <button class="btn btn-gold btn-full trigger-booking-modal">
+            <i class="fa-solid fa-bolt"></i> Book This Package
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ================= BEFORE / AFTER GALLERY ================= -->
+  <section class="section-padding" id="gallery" style="background: var(--bg-dark);">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-tag"><i class="fa-solid fa-images"></i> Studio Portfolio</div>
+        <h2 class="text-gradient" style="font-size: 2.8rem;">BEFORE & AFTER TRANSFORMATIONS</h2>
+        <p class="subtitle">Explore real customer vehicles transformed inside our Hyderabad studio light tunnel.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-card">
+          <img src="assets/images/ppf.png" alt="PPF Installation" style="width:100%; height:240px; object-fit:cover;">
+          <div class="gallery-info">
+            <div class="gallery-title">BMW M5 Full Stealth PPF</div>
+            <span class="gallery-tag">Full Body PPF</span>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="assets/images/hero_car.png" alt="Ceramic Reflection" style="width:100%; height:240px; object-fit:cover;">
+          <div class="gallery-info">
+            <div class="gallery-title">Porsche 911 9H Ceramic Shield</div>
+            <span class="gallery-tag">Ceramic Coating</span>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="assets/images/interior.png" alt="Leather Interior Detailing" style="width:100%; height:240px; object-fit:cover;">
+          <div class="gallery-info">
+            <div class="gallery-title">Mercedes S-Class Nappa Detailing</div>
+            <span class="gallery-tag">Interior Protection</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DETAILING PROCESS ================= -->
+  <section class="section-padding" id="process" style="background: var(--bg-deep);">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-tag"><i class="fa-solid fa-list-check"></i> Standard Operating Procedure</div>
+        <h2 class="text-gradient" style="font-size: 2.8rem;">THE 6-STEP DETAILING PROCESS</h2>
+        <p class="subtitle">Every vehicle follows our sterile multi-point studio protocol for uncompromising results.</p>
+      </div>
+
+      <div class="process-timeline">
+        <div class="process-step">
+          <div class="process-num">01</div>
+          <div class="process-step-title">Inspection</div>
+          <p class="process-desc">Paint depth gauge analysis and LED swirl light defect mapping.</p>
+        </div>
+
+        <div class="process-step">
+          <div class="process-num">02</div>
+          <div class="process-step-title">Pre-Wash</div>
+          <p class="process-desc">pH neutral foam soak & high-pressure touchless rinse.</p>
+        </div>
+
+        <div class="process-step">
+          <div class="process-num">03</div>
+          <div class="process-step-title">Decontam</div>
+          <p class="process-desc">Iron fallout chemical bath & synthetic clay bar treatment.</p>
+        </div>
+
+        <div class="process-step">
+          <div class="process-num">04</div>
+          <div class="process-step-title">Correction</div>
+          <p class="process-desc">Multi-stage rotary compound polishing for 95%+ swirl elimination.</p>
+        </div>
+
+        <div class="process-step">
+          <div class="process-num">05</div>
+          <div class="process-step-title">Protection</div>
+          <p class="process-desc">Infrared ceramic curing or TPU self-healing PPF installation.</p>
+        </div>
+
+        <div class="process-step">
+          <div class="process-num">06</div>
+          <div class="process-step-title">Final QC</div>
+          <p class="process-desc">Hex-light quality assurance check and handover certificate.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 3D GARAGE ================= -->
+  <section class="section-padding" id="garage" style="background: var(--bg-dark);">
+    <div class="container">
+      <div class="garage-container">
+        <div class="garage-header">
+          <div>
+            <div class="section-tag" style="margin:0;"><i class="fa-solid fa-warehouse"></i> My Garage</div>
+            <h2 id="garageVehicleName" style="font-size:2.2rem; margin-top:0.5rem;">BMW 5 Series</h2>
+          </div>
+          <button class="btn btn-gold btn-sm trigger-booking-modal">
+            <i class="fa-solid fa-calendar"></i> Schedule Next Maintenance
+          </button>
+        </div>
+
+        <div class="garage-status-bars">
+          <div class="status-bar-group">
+            <div class="bar-label">
+              <span>TPU PPF Self-Healing Shield</span>
+              <span class="text-gold">100% Intact</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" style="width: 100%;"></div></div>
+          </div>
+
+          <div class="status-bar-group">
+            <div class="bar-label">
+              <span>9H Ceramic Hydrophobic Effect</span>
+              <span class="text-gold">85% Active</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" style="width: 85%;"></div></div>
+          </div>
+
+          <div class="status-bar-group">
+            <div class="bar-label">
+              <span>Interior Leather Anti-Stain Guard</span>
+              <span class="text-gold">90% Active</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" style="width: 90%;"></div></div>
+          </div>
+        </div>
+
+        <div style="margin-top:2rem; font-size:0.85rem; color:var(--text-muted);">
+          <i class="fa-solid fa-clock"></i> Recommended Annual Inspection Date: <strong>12 October 2026</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STUDIO SECTION & LOCATION ================= -->
+  <section class="section-padding" id="studio" style="background: var(--bg-deep);">
+    <div class="container">
+      <div class="studio-grid">
+        <div>
+          <div class="section-tag"><i class="fa-solid fa-location-dot"></i> Visit Our Studio</div>
+          <h2 class="text-gradient" style="font-size: 2.6rem; margin-bottom:1.5rem;">HYDERABAD FLAGSHIP HUB</h2>
+          <p class="subtitle" style="text-align:left; margin:0 0 2rem 0;">Experience our climate-controlled dust-free installation bays and private customer lounge.</p>
+
+          <div style="display:flex; flex-direction:column; gap:1.25rem;">
+            <div style="display:flex; gap:1rem; align-items:center;">
+              <i class="fa-solid fa-map-pin text-gold" style="font-size:1.4rem;"></i>
+              <div>
+                <strong>Location</strong><br>
+                <span style="color:var(--text-muted);">Jubilee Hills, Road No. 36, Hyderabad, Telangana</span>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:1rem; align-items:center;">
+              <i class="fa-solid fa-clock text-gold" style="font-size:1.4rem;"></i>
+              <div>
+                <strong>Opening Hours</strong><br>
+                <span style="color:var(--text-muted);">Monday – Sunday: 9:00 AM – 8:00 PM</span>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:1rem; align-items:center;">
+              <i class="fa-solid fa-phone text-gold" style="font-size:1.4rem;"></i>
+              <div>
+                <strong>Direct Line</strong><br>
+                <span style="color:var(--text-muted);">+91 98765 43210 / concierges@detailx.in</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-placeholder">
+          <img src="assets/images/studio.png" alt="DetailX Hyderabad Studio Interior" style="width:100%; height:100%; object-fit:cover;">
+          <div class="map-overlay-badge">
+            <i class="fa-solid fa-circle text-gold" style="font-size:0.6rem;"></i> Live Studio Bays Open
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BOOKING MODAL DIALOG ================= -->
+  <div class="modal-overlay" id="bookingModal">
+    <div class="modal-content">
+      <button class="modal-close" id="modalCloseBtn">&times;</button>
+      
+      <div class="step-title">
+        <span class="step-num"><i class="fa-solid fa-calendar-check"></i></span>
+        <span>Schedule Studio Appointment</span>
+      </div>
+
+      <form id="bookingForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Vehicle Selected</label>
+            <input type="text" class="form-input" id="bookVehicleSelect" readonly>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Preferred Date</label>
+            <input type="date" class="form-input" id="bookDate" required value="2026-10-02">
+          </div>
+
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label class="form-label">Available Time Slots</label>
+            <div class="time-slots-grid" id="timeSlotGrid">
+              <div class="slot-chip" data-slot="09:00 AM">09:00 AM</div>
+              <div class="slot-chip selected" data-slot="11:30 AM">11:30 AM</div>
+              <div class="slot-chip" data-slot="02:00 PM">02:00 PM</div>
+              <div class="slot-chip" data-slot="04:30 PM">04:30 PM</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-input" id="bookName" placeholder="Rahul Sharma" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-input" id="bookPhone" placeholder="+91 98765 43210" required>
+          </div>
+
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" id="bookEmail" placeholder="rahul@example.com">
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:2rem; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.1);">
+          <div style="font-weight:800; font-size:1.3rem; color:var(--gold-primary);" id="modalTotalPreview">Total: ₹0</div>
+          <button type="submit" class="btn btn-gold">Confirm Appointment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= BOOKING CONFIRMATION MODAL ================= -->
+  <div class="modal-overlay" id="confirmationModal">
+    <div class="modal-content" style="text-align:center;">
+      <div style="width:70px; height:70px; border-radius:50%; background:rgba(212,175,55,0.15); color:var(--gold-primary); font-size:2rem; display:inline-flex; align-items:center; justify-content:center; margin-bottom:1rem;">
+        <i class="fa-solid fa-circle-check"></i>
+      </div>
+      <h2 style="margin-bottom:0.5rem;">APPOINTMENT CONFIRMED</h2>
+      <p style="color:var(--text-muted); margin-bottom:1.5rem;">Your detailing slot has been reserved in our Hyderabad studio.</p>
+
+      <div class="glass-card" style="text-align:left; margin-bottom:2rem;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem;">
+          <span style="color:var(--text-muted);">Booking Reference</span>
+          <strong id="confBookingId" class="text-gold">#DX-00000</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem;">
+          <span style="color:var(--text-muted);">Vehicle</span>
+          <strong id="confVehicle">BMW 5 Series</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem;">
+          <span style="color:var(--text-muted);">Date & Time</span>
+          <strong id="confDate">2026-10-02 @ 11:30 AM</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between;">
+          <span style="color:var(--text-muted);">Estimated Total</span>
+          <strong id="confTotal" style="color:var(--gold-primary)">₹0</strong>
+        </div>
+      </div>
+
+      <button class="btn btn-gold btn-full" id="confCloseBtn">Done & Return Home</button>
+    </div>
+  </div>
+
+  <!-- ================= ADMIN DASHBOARD PORTAL MODAL ================= -->
+  <div class="modal-overlay" id="adminModal">
+    <div class="modal-content admin-modal-content">
+      <button class="modal-close" id="adminModalCloseBtn">&times;</button>
+
+      <div class="step-title">
+        <span class="step-num"><i class="fa-solid fa-sliders"></i></span>
+        <span>Studio Admin Management Portal</span>
+      </div>
+
+      <div class="admin-nav">
+        <button class="admin-tab active">Service Pricing</button>
+        <button class="admin-tab">Active Bookings</button>
+      </div>
+
+      <div>
+        <h4 style="margin-bottom:1rem;">Dynamic Price Management</h4>
+        <p style="font-size:0.85rem; color:var(--text-muted);">Changes update all configurator cards and calculation total instantly.</p>
+
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Service Name</th>
+              <th>Current Price</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="adminServicesTbody"></tbody>
+        </table>
+
+        <h4 style="margin:2.5rem 0 1rem 0;">Recent Customer Bookings</h4>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Customer</th>
+              <th>Vehicle</th>
+              <th>Slot</th>
+              <th>Total</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="adminBookingsTbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="#" class="logo" style="margin-bottom:1rem;">RAW<span class="text-gold">STUDIOS</span></a>
+          <p style="font-size:0.9rem; color:var(--text-muted); max-width:320px;">
+            Precision. Protection. Perfection.<br>
+            Engineering vehicle finish perfection since 2020.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#configurator">3D Configurator</a></li>
+            <li><a href="#gallery">Portfolio Gallery</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul class="footer-links">
+            <li><a href="#configurator">Full Body PPF</a></li>
+            <li><a href="#configurator">9H Ceramic Coating</a></li>
+            <li><a href="#configurator">Paint Correction</a></li>
+            <li><a href="#configurator">Interior Detailing</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact Studio</h4>
+          <ul class="footer-links">
+            <li><i class="fa-solid fa-phone text-gold"></i> +91 98765 43210</li>
+            <li><i class="fa-solid fa-envelope text-gold"></i> concierges@rawstudios.in</li>
+            <li><i class="fa-solid fa-map-pin text-gold"></i> Jubilee Hills, Hyderabad</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        Copyright © 2026 RAW STUDIOS. All Rights Reserved. Designed with cinematic WebGL 3D aesthetics.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="js/3d-configurator.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
